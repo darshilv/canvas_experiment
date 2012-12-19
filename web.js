@@ -45,17 +45,20 @@ app.post('/', function(request, response){
     oauth.access_token = requestContext.oauthToken;
     oauth.instance_url = requestContext.instanceUrl;
     
+    var certifications = new Array();
     var query = 'Select Id, Name from Certification__c Limit 5'; 
     org.query(query,oauth, function(err,resp){
     	if(!err && resp.records){
     		for(var i=0; i < resp.records.length; i++){
+				certifications.push("Certification --> Name:" + resp.records[i].Name + "|| Id: " + resp.records[i].Id);
     			console.log("Certification --> Name:" + resp.records[i].Name + "|| Id: " + resp.records[i].Id);
     		}
     		
     	}
     });
 
-    response.sendfile('index.html');
+    response.render(certifications);
+    //response.sendfile('index.html');
 
 });
 

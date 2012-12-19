@@ -20,7 +20,7 @@
 		  var socket = io.connect();
 
 		  socket.on('news', function (data) {
-			jQuery('.slides').append('<section><h2><a href="https://na2.salesforce.com/'+data.sobject.Id+'">'+data.sobject.FirstName+' '+data.sobject.LastName+'</a></h2><br>'+data.sobject.Email+'<br/></section>');
+			jQuery('.slides').append('<section><h2><a href="https://na14.salesforce.com/'+data.sobject.Id+'">'+data.sobject.FirstName+' '+data.sobject.LastName+'</a></h2><br>'+data.sobject.Email+'<br/></section>');
 			
 			Reveal.navigateNext();
 		  });

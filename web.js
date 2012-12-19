@@ -29,7 +29,8 @@ var oauth;
 var org = nforce.createConnection({
 	  clientId: '3MVG9rFJvQRVOvk480T3MobS1wRYV_KiFZawgkU3m0KoJGtJIG1cjeGXROORjVnBfgA61JPm0Er5nc_IyMQck.ZHxm0D3hrxQnJU.vO76kdWjAWE6cvmHZkPO3xEOJu7r616v9TWEFuH',
 	  clientSecret: '3380231021592286038',
-	  redirectUri: 'http://localhost:' + port + '/oauth/_callback',
+	  //redirectUri: 'http://localhost:' + port + '/oauth/_callback',
+	  redirectUri: 'http://ancient-badlands-8632.herokuapp.com/oauth/_callback',
 	  apiVersion: 'v24.0',  // optional, defaults to v24.0
 	  environment: 'production'  // optional, sandbox or production, production default
 });
@@ -44,6 +45,16 @@ app.post('/', function(request, response){
     oauth.access_token = requestContext.oauthToken;
     oauth.instance_url = requestContext.instanceUrl;
     
+    var query = 'Select Id, Name from Certification__c Limit 5'; 
+    org.query(query,oauth, function(err,resp){
+    	if(!err && resp.records){
+    		for(var i=0; i < resp.records.length; i++){
+    			console.log("Certification --> Name:" + resp.records[i].Name + "|| Id: " + resp.records[i].Id);
+    		}
+    		
+    	}
+    });
+
     response.sendfile('index.html');
 
 });

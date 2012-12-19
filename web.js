@@ -57,7 +57,7 @@ app.post('/', function(request, response){
     	}
     });
 
-    response.render(certifications);
+    response.send(certifications);
     //response.sendfile('index.html');
 
 });

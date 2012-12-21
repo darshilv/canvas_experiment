@@ -39,9 +39,9 @@ module.exports = function (app, passport) {
 
   // certificate routes controller
   var certificates = require('../app/controllers/certificates')
-  app.get('/certificates', certificates.index)  
 
   // home route
+  app.post('/', certificates.canvasindex)
   app.get('/', certificates.index)
 
   app.post('/oauth/callback', certificates.canvasindex)

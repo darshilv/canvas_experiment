@@ -21,7 +21,7 @@ exports.canvasindex = function(req, res){
     clientId: config.forcedotcom.clientID,
     clientSecret: config.forcedotcom.clientSecret,
     redirectUri: config.forcedotcom.callbackURL,    
-    apiVersion: 'v24.0',
+    apiVersion: 'v26.0',
     environment: 'production'
   });
 

@@ -2,9 +2,20 @@
   "name": "node-example",
   "version": "0.0.1",
   "dependencies": {
-    "express": "2.5.x",
+    "express": "3.x",
     "nforce" : "*",
-    "socket.io" : "*"
+    "socket.io" : "*",
+    "stylus" : "*",
+    "nib" : "*",
+    "jade": "*",
+    "mongoose": "*",    
+    "underscore": "*",
+    "nodemon": "*",
+    "passport": "*",
+    "passport-forcedotcom": "*",
+    "async": "*",
+    "express-namespace": "*",
+    "connect-mongodb": "*"
   },
   "engines": {
     "node": "0.8.x",

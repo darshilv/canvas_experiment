@@ -1,0 +1,8 @@
+extends ../layouts/default
+block content	
+	ul.thumbnails
+		each item in certificates
+			li.span4
+				.thumbnail					
+					a(href='/#{item.getId()}') #{item.Name}
+					p #{item.Certification_Name__c}			

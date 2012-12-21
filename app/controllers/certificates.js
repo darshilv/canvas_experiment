@@ -9,6 +9,7 @@ exports.index = function(req,res){
 }
 
 exports.canvasindex = function(req, res){
+  
   var reqBody = req.body.signed_request;   
   var requestSegments = reqBody.split('.');    
   var requestContext = JSON.parse(new Buffer(requestSegments[1], 'base64').toString('ascii'));
@@ -25,7 +26,8 @@ exports.canvasindex = function(req, res){
     environment: 'production'
   });
 
-  var query = 'Select Id, Name, Certification_Date__c, Certification_Name__c, Expiration_Date__c, Icon_Active__c, Icon_Deactive__c, Role_Tag__c from Certification__c Limit 5';
+  //var query = 'Select Id, Name, Certification_Date__c, Certification_Name__c, Expiration_Date__c, Icon_Active__c, Icon_Deactive__c, Role_Tag__c from Certification__c Limit 5';
+  var query = 'Select Id, Name, Certification_Date__c, Certification_Name__c from Certification__c Limit 5';
   org.query(query,oauth, function(err,resp){
     if(!err && resp.records){     
       /*console.log(resp.records);

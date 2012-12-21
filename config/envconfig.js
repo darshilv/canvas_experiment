@@ -1,6 +1,6 @@
 module.exports = {
     development: {
-      db: 'mongodb://localhost/noobjs_dev',
+      db: 'mongodb://darshilv:sunrise@linus.mongohq.com:10015/app10179448',
       facebook: {
           clientID: "APP_ID"
         , clientSecret: "APP_SECRET"

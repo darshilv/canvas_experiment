@@ -3,6 +3,11 @@ block content
 	ul.thumbnails
 		each item in certificates
 			li.span4
-				.thumbnail					
+				.thumbnail
+					.dImage
+						- if (item.showActive)
+							!{item.Rich_Active_Badge__c}
+						-else
+							!{item.Rich_Inactive_Badge__c}					
 					a(href='/#{item.getId()}') #{item.Name}
-					p #{item.Certification_Name__c}			
+					p #{item.Certification_Name__c}								

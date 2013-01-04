@@ -26,7 +26,7 @@ module.exports = function (app, passport) {
   app.get('/auth/forcedotcom', passport.authenticate('forcedotcom', { failureRedirect: '/login'}), users.signin)
   app.get('/auth/forcedotcom/callback', passport.authenticate('forcedotcom', { failureRedirect: '/login' }), users.authCallback)
 
-  app.param('userId', function (req, res, next, id) {
+  /*app.param('userId', function (req, res, next, id) {
     User
       .findOne({ _id : id })
       .exec(function (err, user) {
@@ -35,7 +35,7 @@ module.exports = function (app, passport) {
         req.profile = user
         next()
       })
-  })
+  })*/
 
   // certificate routes controller
   var certificates = require('../app/controllers/certificates')

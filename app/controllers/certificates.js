@@ -17,6 +17,9 @@ exports.canvasindex = function(req, res){
   oauth = new Object();
   oauth.access_token = requestContext.oauthToken;
   oauth.instance_url = requestContext.instanceUrl;
+  oauth.userId = requestContext.userId;
+  //remember that requestContext contains the context information you need
+  //console.log(requestContext);
   
   var org = new nforce.createConnection({
     clientId: config.forcedotcom.clientID,
@@ -26,18 +29,40 @@ exports.canvasindex = function(req, res){
     environment: 'production'
   });
 
+  var myCertificates;
   //var query = 'Select Id, Name, Certification_Date__c, Certification_Name__c, Expiration_Date__c, Icon_Active__c, Icon_Deactive__c, Role_Tag__c from Certification__c Limit 5';
-  var query = 'Select Id, Name, Certification_Date__c, Certification_Name__c from Certification__c Limit 5';
+  var query = 'Select Id, Name, Certification_Date__c, Certification_Name__c, Rich_Inactive_Badge__c, Rich_Active_Badge__c from Certification__c Limit 5';
+  var userquery = 'Select Id, Name, User__c, Certification__c from User_Certification_Junc__c where User__c = \'' + oauth.userId + '\'';
+
+  //nested queries will need to done to fetch cohesive data
   org.query(query,oauth, function(err,resp){
-    if(!err && resp.records){     
-      /*console.log(resp.records);
-      for(var i=0; i < resp.records.length; i++){       
-        console.log("Certification --> Name:" + resp.records[i].Name + "|| Id: " + resp.records[i].getId());
-        console.log(resp.records[i].Certification_Name__c);
-      }*/       
-      res.render('certificates/index', {title: 'List of Certifications', 'certificates': resp.records, showStack: true});   
+    if(!err && resp.records){
+      myCertificates = resp.records; 
+      org.query(userquery, oauth, function(err,resp){
+        if(!err){
+          //console.log(res);
+          var usercerts = resp.records;
+          for(var i=0; i < usercerts.length; i++){
+            for(var j=0; j < myCertificates.length; j++){
+              if(myCertificates[j].getId().indexOf(usercerts[i].Certification__c) != -1){
+                //console.log(myCertificates[j].getId() + "||" + usercerts[i].Certification__c);
+                console.log("found");
+                myCertificates[j].showActive = true;
+              }
+            }
+          }
+
+          res.render('certificates/index', {title: 'List of Certifications', 'certificates': myCertificates, showStack: true});
+        } else{
+          console.log(err);
+        }
+      });
+
+
     }
   });
+  //the problem with response here is that it executes before the data is retrieved
+     
   /*var org = nforce.createConnection({
     clientId: ,
     clientSecret: ,

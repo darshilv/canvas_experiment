@@ -3,8 +3,8 @@ var express = require('express')
   , stylus = require('stylus')
   , nib = require('nib')
 
-exports.boot = function(app, config, passport){
-  bootApplication(app, config, passport)
+exports.boot = function(app, config){
+  bootApplication(app, config)
 }
 
 // App settings and middleware
@@ -14,7 +14,7 @@ function compile(str, path) {
     .use(nib())
 }
 
-function bootApplication(app, config, passport) {
+function bootApplication(app, config) {
 
   app.set('showStackError', true)
 
@@ -34,8 +34,8 @@ function bootApplication(app, config, passport) {
   app.configure(function () {
     // dynamic helpers
     app.use(function (req, res, next) {
-      res.locals.appName = 'Nodejs Express Mongoose Demo'
-      res.locals.title = 'Nodejs Express Mongoose Demo'
+      res.locals.appName = 'Canvas Certify'
+      res.locals.title = 'Canvas Certify'
       res.locals.showStack = true
       res.locals.req = req
       res.locals.formatDate = function (date) {
@@ -83,9 +83,6 @@ function bootApplication(app, config, passport) {
         collection : 'sessions'
       })
     }))
-
-    app.use(passport.initialize())
-    app.use(passport.session())
 
     app.use(express.favicon())
 

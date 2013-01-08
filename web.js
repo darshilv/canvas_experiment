@@ -1,8 +1,7 @@
 
 
 var express = require('express')
-  , fs = require('fs')
-  , passport = require('passport')
+  , fs = require('fs')  
 
 require('express-namespace')
 
@@ -22,13 +21,13 @@ model_files.forEach(function (file) {
 })
 
 // bootstrap passport config
-require('./config/passport').boot(passport, config)
+//require('./config/passport').boot(config)
 
 var app = express()                                       // express app
-require('./settings').boot(app, config, passport)         // Bootstrap application settings
+require('./settings').boot(app, config)         // Bootstrap application settings
 
 // Bootstrap routes
-require('./config/routes')(app, passport)
+require('./config/routes')(app)
 
 // Start the app by listening on <port>
 var port = process.env.PORT || 3001
